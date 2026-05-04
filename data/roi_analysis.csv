@@ -1,0 +1,5 @@
+segment,n_customers,avg_churn_prob,avg_monthly_charge,intervention_cost,net_value,ROI_%
+Persuadable,773,0.613,39.12,15119.0,48984.0,324.0
+Sure Thing,1411,0.072,36.95,26070.0,-13121.0,-50.3
+Sleeping Dog,3151,0.071,76.94,121222.0,-482364.0,-397.9
+Lost Cause,1708,0.619,76.87,65648.0,-145434.0,-221.5
