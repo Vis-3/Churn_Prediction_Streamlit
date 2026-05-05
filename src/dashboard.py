@@ -242,8 +242,8 @@ raw["TotalCharges"] = pd.to_numeric(raw["TotalCharges"], errors="coerce").fillna
 # ── Hero ──────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="hero">
-  <h1>📡 Churn Intelligence Platform</h1>
-  <p>An end-to-end data science case study — from raw customer data to causal intervention strategy.
+  <h1>Churn Intelligence Platform</h1>
+  <p>An end-to-end data science case study: from raw customer data to causal intervention strategy.
   We don't just predict who will leave; we identify <strong>why</strong> they leave and
   <strong>who will respond</strong> to retention efforts, quantified in ROI.</p>
 </div>
@@ -251,12 +251,12 @@ st.markdown("""
 
 # ── Tabs ──────────────────────────────────────────────────────────────────────
 tabs = st.tabs([
-    "📋 The Problem",
-    "🔍 Data Explorer",
-    "⚙️ Feature Engineering",
-    "🤖 Modeling",
-    "🎯 Causal Inference",
-    "💰 Business Impact",
+    "The Problem",
+    "Data Explorer",
+    "Feature Engineering",
+    "Modeling",
+    "Causal Inference",
+    "Business Impact",
 ])
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -267,8 +267,8 @@ with tabs[0]:
     <p style="font-size:1.05rem;color:#475569;line-height:1.8;max-width:780px">
     Telecom churn costs the industry <strong>$62B annually</strong>. For a company with 7,000 customers
     charging ~$65/month, every percentage-point drop in churn rate is worth <strong>~$55,000/year</strong>.
-    The challenge: most churn models tell you <em>who</em> will leave but not <em>what to do about it</em>
-    — and blindly contacting at-risk customers can make things worse.
+    The challenge: most churn models tell you <em>who</em> will leave but not <em>what to do about it</em>.
+    Blindly contacting at-risk customers can make things worse.
     </p>
     """, unsafe_allow_html=True)
 
@@ -324,9 +324,9 @@ with tabs[0]:
         st.plotly_chart(fig, use_container_width=True)
 
     st.markdown(insight(
-        "🔑 <strong>Key finding:</strong> Month-to-month customers churn at <strong>42.7%</strong> vs "
+        "<strong>Key finding:</strong> Month-to-month customers churn at <strong>42.7%</strong> vs "
         "just <strong>6.8%</strong> for annual/two-year contracts. Contract type is the single strongest "
-        "observable driver — but is it causal? (We test this in Tab 5.)",
+        "observable driver, but is it causal? (We test this in Tab 5.)",
         "blue"
     ), unsafe_allow_html=True)
 
@@ -343,8 +343,8 @@ with tabs[0]:
         st.markdown(
             f'<div style="padding:.6rem 0;border-bottom:1px solid {C["border"]}">'
             f'<span class="step-badge">{badge}</span>'
-            f'<strong style="color:#e2e8f0">{title}</strong> '
-            f'<span style="color:{C["muted"]};font-size:.88rem">— {desc}</span>'
+            f'<strong style="color:#e2e8f0">{title}</strong>'
+            f'<span style="color:{C["muted"]};font-size:.88rem;margin-left:.5rem">{desc}</span>'
             f'</div>',
             unsafe_allow_html=True
         )
@@ -380,7 +380,7 @@ with tabs[1]:
             col.plotly_chart(fig, use_container_width=True)
 
     st.markdown(insight(
-        "📊 Churners are heavily concentrated in <strong>early tenure (0–12 months)</strong> "
+        "Churners are heavily concentrated in <strong>early tenure (0–12 months)</strong> "
         "and <strong>higher monthly charges</strong>. Customers who survive past 2 years rarely leave. "
         "This motivates both the <code>early_customer</code> flag and <code>price_tenure_risk</code> feature.",
         "blue"
@@ -444,8 +444,8 @@ with tabs[1]:
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown(insight(
-        "⚠️ <strong>51% of churners leave within the first 12 months.</strong> The drop from 0–6m band "
-        "to 61–72m band is extreme — early-tenure customers are a fundamentally different risk cohort. "
+        "<strong>51% of churners leave within the first 12 months.</strong> The drop from the 0–6m band "
+        "to the 61–72m band is extreme: early-tenure customers are a fundamentally different risk cohort. "
         "This directly motivated the <code>early_customer</code> (tenure ≤ 6) binary feature.",
         "amber"
     ), unsafe_allow_html=True)
@@ -479,14 +479,14 @@ with tabs[2]:
 
     section("Engineered Feature Catalogue")
     feat_rows = [
-        ("price_stress",              "MonthlyCharges × IsMonthToMonth",    "High charges on a flexible contract — the riskiest combination"),
+        ("price_stress",              "MonthlyCharges × IsMonthToMonth",    "High charges on a flexible contract, the riskiest combination"),
         ("price_tenure_risk",         "MonthlyCharges ÷ (tenure + 1)",      "Price burden relative to relationship depth; spikes for new, expensive customers"),
-        ("fiber_contract_risk",       "IsFiber × IsMonthToMonth",           "Fiber optic customers on short-term contracts — highest empirical churn group"),
+        ("fiber_contract_risk",       "IsFiber × IsMonthToMonth",           "Fiber optic customers on short-term contracts, the highest empirical churn group"),
         ("early_customer",            "tenure ≤ 6 months  (binary)",        "First 6 months are the critical retention window"),
         ("fiber_new_customer",        "IsFiber × early_customer",           "Brand-new fiber customers face both onboarding friction and service issues"),
         ("ContractMonths",            "Contract → {1, 12, 24}",             "Numeric encoding of contractual lock-in"),
         ("Contract_Tenure_Interaction","ContractMonths × tenure",           "Rewards customers who have stayed longer than their contract requires"),
-        ("HasMultipleServices",       "Count of add-on services (0–6)",     "Engagement proxy — customers with more services are stickier"),
+        ("HasMultipleServices",       "Count of add-on services (0–6)",     "Engagement proxy: customers with more services are stickier"),
         ("AvgMonthlySpend",           "TotalCharges ÷ tenure",              "Normalised spend; corrects for tenure length when comparing bills"),
     ]
 
@@ -587,9 +587,9 @@ with tabs[2]:
         st.image(shap_path, use_container_width=True)
 
     st.markdown(insight(
-        "✅ <strong>All 5 interaction features rank in the top 15 by SHAP importance</strong>, "
+        "<strong>All 5 interaction features rank in the top 15 by SHAP importance</strong>, "
         "validating the feature engineering hypotheses. The ensemble ROC-AUC improved from "
-        "<strong>0.834 → 0.847</strong> after adding them.",
+        "<strong>0.834 to 0.847</strong> after adding them.",
         "green"
     ), unsafe_allow_html=True)
 
@@ -602,7 +602,7 @@ with tabs[3]:
         '<p style="font-size:1rem;color:#475569;line-height:1.7;max-width:760px">'
         'We benchmarked 9 model families, tuned the top performers with Optuna, '
         'and combined them into a calibrated voting ensemble. '
-        'Calibration ensures the predicted probabilities are reliable — critical for the '
+        'Calibration ensures the predicted probabilities are reliable, critical for the '
         'uplift segmentation downstream.'
         '</p>', unsafe_allow_html=True
     )
@@ -639,7 +639,7 @@ with tabs[3]:
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown(insight(
-        "🏆 The top-3 models (Gradient Boosting, Logistic Regression, LDA) were tuned with Optuna "
+        "The top-3 models (Gradient Boosting, Logistic Regression, LDA) were tuned with Optuna "
         "(40/30/20 trials respectively) and combined via <strong>soft-voting ensemble</strong>. "
         "Probabilities were then calibrated with <strong>isotonic regression</strong> to improve "
         "reliability for downstream uplift modeling.",
@@ -714,7 +714,7 @@ with tabs[3]:
         )
 
     st.markdown(insight(
-        "⚖️ <strong>Why threshold 0.30 instead of 0.50?</strong> The cost of a missed churner "
+        "<strong>Why threshold 0.30 instead of 0.50?</strong> The cost of a missed churner "
         "(losing the customer entirely) far exceeds the cost of a false alarm (a wasted retention offer). "
         "We tuned the threshold to maximise F1 on the churn class, accepting more false positives "
         "in exchange for catching more true churners.",
@@ -730,7 +730,7 @@ with tabs[4]:
         '<p style="font-size:1rem;color:#475569;line-height:1.7;max-width:760px">'
         'A predictive model tells you <em>who is likely to churn</em>. '
         'A causal model tells you <em>what is causing the churn</em>. '
-        'These are fundamentally different questions — and conflating them leads to wasted budgets, '
+        'These are fundamentally different questions. Conflating them leads to wasted budgets, '
         'or worse, interventions that accelerate the very behaviour you want to prevent.'
         '</p>', unsafe_allow_html=True
     )
@@ -774,7 +774,7 @@ with tabs[4]:
         <div style="background:#0f2a1e;border-left:3px solid {C['retain']};border-radius:8px;
                     padding:.8rem;margin-top:1rem;font-size:.88rem;color:#6ee7b7">
           ✅ <strong>Result:</strong> We know this customer responds positively to contract-based
-          interventions — targeting them yields positive expected ROI.
+          interventions, targeting them yields positive expected ROI.
         </div>
         </div>
         """, unsafe_allow_html=True)
@@ -784,7 +784,7 @@ with tabs[4]:
     st.markdown(
         '<p style="font-size:.92rem;color:#475569;line-height:1.6;max-width:720px;margin-bottom:1rem">'
         'PSM creates matched pairs of similar customers who differ only on one treatment variable. '
-        'The difference in churn rates between matched pairs is the <strong>causal effect</strong> — '
+        'The difference in churn rates between matched pairs is the <strong>causal effect</strong>: '
         'not a correlation, but an estimate of what would happen if we changed that one factor.'
         '</p>', unsafe_allow_html=True
     )
@@ -842,8 +842,8 @@ with tabs[4]:
         """, unsafe_allow_html=True)
 
     st.markdown(insight(
-        "🔬 <strong>Fiber optic + month-to-month is the highest-risk combination.</strong> "
-        "Fiber optic causally adds +36.1pp to churn; month-to-month adds +30.4pp — independently, "
+        "<strong>Fiber optic + month-to-month is the highest-risk combination.</strong> "
+        "Fiber optic causally adds +36.1pp to churn; month-to-month adds +30.4pp, independently, "
         "after controlling for price, tenure, demographics, and service bundle.",
         "red"
     ), unsafe_allow_html=True)
@@ -877,10 +877,10 @@ with tabs[4]:
     # ── Segment strategy ─────────────────────────────────────────────────────
     section("The 4-Segment Intervention Strategy")
     seg_table = pd.DataFrame([
-        ("Persuadable",  "High", "Positive", "🎯 Intervene — highest ROI",         C["secondary"]),
-        ("Lost Cause",   "High", "Negative", "⏭️ Skip — won't respond to treatment", C["churn"]),
-        ("Sleeping Dog", "Low",  "Negative", "🚫 Do NOT contact — intervention accelerates churn", C["warning"]),
-        ("Sure Thing",   "Low",  "Positive", "👁️ Monitor only — will stay without help", C["retain"]),
+        ("Persuadable",  "High", "Positive", "Intervene: highest ROI",                    C["secondary"]),
+        ("Lost Cause",   "High", "Negative", "Skip: won't respond to treatment",           C["churn"]),
+        ("Sleeping Dog", "Low",  "Negative", "Do NOT contact: intervention accelerates churn", C["warning"]),
+        ("Sure Thing",   "Low",  "Positive", "Monitor only: will stay without help",       C["retain"]),
     ], columns=["Segment", "Churn Risk", "Treatment Uplift", "Strategy", "_color"])
 
     for _, row in seg_table.iterrows():
@@ -897,8 +897,8 @@ with tabs[4]:
         )
 
     st.markdown(insight(
-        "🚫 <strong>The Sleeping Dog insight is the most counterintuitive finding.</strong> "
-        "These customers have negative treatment uplift — contacting them about their contract "
+        "<strong>The Sleeping Dog insight is the most counterintuitive finding.</strong> "
+        "These customers have negative treatment uplift: contacting them about their contract "
         "appears to <em>remind them they could leave</em>. Any blanket 'contact all at-risk' strategy "
         "would inadvertently trigger churn in this 3,151-customer group.",
         "red"
@@ -1008,7 +1008,7 @@ with tabs[5]:
             fig.update_layout(
                 **LAYOUT, height=360,
                 yaxis_ticksuffix="%",
-                title="ROI by Segment — only Persuadable customers generate positive returns",
+                title="ROI by Segment: only Persuadable customers generate positive returns",
                 yaxis_range=[min(roi_plot["ROI_%"]) * 1.2, max(roi_plot["ROI_%"]) * 1.35],
             )
             st.plotly_chart(fig, use_container_width=True)
@@ -1061,20 +1061,10 @@ with tabs[5]:
                 ), unsafe_allow_html=True)
 
         # ── Priority customer list ─────────────────────────────────────────────
-        section("Priority Intervention List — Persuadable Customers")
+        section("Priority Intervention List: Persuadable Customers")
         if "segment" in risk_df.columns:
             persuadable = risk_df[risk_df["segment"] == "Persuadable"].copy()
 
-            sidebar_col, _ = st.columns([1, 2])
-            with sidebar_col:
-                tenure_filter = st.slider(
-                    "Filter by tenure (months)", 0, 72, (0, 24), key="tenure_filter"
-                )
-
-            persuadable = persuadable[
-                (persuadable["tenure"] >= tenure_filter[0]) &
-                (persuadable["tenure"] <= tenure_filter[1])
-            ]
 
             display_cols = [c for c in
                 ["customerID", "tenure", "MonthlyCharges", "Contract",
@@ -1090,7 +1080,7 @@ with tabs[5]:
                 f'<p style="color:{C["muted"]};font-size:.88rem;margin-bottom:.8rem">'
                 f'Showing top <strong style="color:{C["text"]}">{len(disp)}</strong> of '
                 f'<strong style="color:{C["text"]}">{len(persuadable):,}</strong> Persuadable customers '
-                f'in selected tenure range — sorted by churn probability.</p>',
+                f'in selected tenure range, sorted by churn probability.</p>',
                 unsafe_allow_html=True
             )
 
@@ -1144,8 +1134,8 @@ with tabs[5]:
     # ── Final summary ─────────────────────────────────────────────────────────
     section("Summary: What Makes This Approach Different")
     summary_points = [
-        (C["secondary"], "Beyond Prediction", "Most churn tools stop at a risk score. We go further — using causal inference to identify which customers will actually respond to intervention."),
-        (C["retain"],    "No Wasted Spend",   "The Sleeping Dog segment (3,151 customers) has negative uplift — contacting them increases churn. A standard model would target them."),
+        (C["secondary"], "Beyond Prediction", "Most churn tools stop at a risk score. We go further, using causal inference to identify which customers will actually respond to intervention."),
+        (C["retain"],    "No Wasted Spend",   "The Sleeping Dog segment (3,151 customers) has negative uplift. Contacting them increases churn. A standard model would target them."),
         (C["purple"],    "Quantified ROI",    "Every recommendation comes with an expected return, making it easy to prioritise budget allocation across customer segments."),
         (C["warning"],   "Honest Uncertainty","Causal estimates rely on PSM assumptions. We report effect sizes alongside confounder sets and acknowledge untestable assumptions."),
     ]
